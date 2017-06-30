@@ -1,7 +1,7 @@
 import { IGameState, initialState as defaultState } from './state';
-import stateBasedEffects from './state-based-effects';
+import { stateBasedEffects } from './state-based-effects';
 
-export default class GameContainer {
+export class GameContainer {
   private states: IGameState[];
   private actions: any[];
   private stateBasedEffects: Function[];
@@ -24,6 +24,7 @@ export default class GameContainer {
     const newState: IGameState = reducer(state);
     this.states.unshift(newState);
     this.actions.unshift(reducer);
+
     return newState;
   }
 }
