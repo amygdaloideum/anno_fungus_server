@@ -21,7 +21,6 @@
       "call-signature",
       "parameter",
       "member-variable-declaration",
-      "arrow-parameter",
       "property-declaration"
     ],
     "member-access": [
