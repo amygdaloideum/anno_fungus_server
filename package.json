@@ -1,0 +1,19 @@
+{
+  "name": "anno_fungi_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ts-node -- ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^8.0.6",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.1.0",
+    "typescript": "^2.4.1"
+  }
+}
