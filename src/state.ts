@@ -1,7 +1,7 @@
-export interface GameState {
-    readonly turn: number;
-};
+export interface IGameState {
+  readonly turn: number;
+}
 
-export const initialState: GameState = {
-    turn: 0,
+export const initialState: IGameState = {
+  turn: 0,
 };
