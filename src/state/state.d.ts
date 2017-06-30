@@ -4,4 +4,4 @@ export interface IGameState {
 
 export interface IReducer {
     (state: IGameState): IGameState;
-};
+}

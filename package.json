@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build:live",
     "build:live": "nodemon --exec ts-node -- ./index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p tsconfig.json --type-check index.ts"
   },
   "author": "",
   "license": "ISC",

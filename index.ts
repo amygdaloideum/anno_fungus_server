@@ -1,5 +1,5 @@
 import { GameContainer } from './src/game-container';
-import { IGameState, initialState } from './src/state';
+import { initialState } from './src/state/state';
 
 const gameContainer = new GameContainer(initialState);
 
