@@ -1,4 +1,4 @@
-import { IReducer } from '../state/IState';
+import { IReducer } from '../state';
 
 export interface ICard {
     id: number;
