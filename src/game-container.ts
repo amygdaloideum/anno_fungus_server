@@ -1,5 +1,6 @@
-import { IGameState, initialState as defaultState } from './state';
 import { stateBasedEffects } from './state-based-effects';
+import { initialState as defaultState  } from './state/state';
+import { IGameState } from './state/state.d';
 
 export class GameContainer {
   private states: IGameState[];
@@ -17,11 +18,11 @@ export class GameContainer {
   }
 
   public applyStateBasedEffects(): void {
-    this.stateBasedEffects.forEach(effect => this.next(this.getLatestState(), effect));
+    this.stateBasedEffects.forEach(effect => this.next(effect));
   }
 
-  public next(state: IGameState, reducer: Function): IGameState {
-    const newState: IGameState = reducer(state);
+  public next(reducer: Function): IGameState {
+    const newState: IGameState = reducer(this.getLatestState());
     this.states.unshift(newState);
     this.actions.unshift(reducer);
 

@@ -1,4 +1,4 @@
-import { IGameState } from './state';
+import { IGameState } from './state/state.d';
 
 const changeTurn = (state: IGameState): IGameState => {
   return {
