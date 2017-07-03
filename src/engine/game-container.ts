@@ -7,7 +7,7 @@ export class GameContainer {
   private actions: any[];
   private stateBasedEffects: Function[];
 
-  constructor(initialState: IGameState) {
+  constructor(initialState: IGameState = defaultState) {
     this.states = [];
     this.actions = [];
     this.states.push(initialState);

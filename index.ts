@@ -1,6 +1,6 @@
-import { sunrise } from './src/cards/card';
-import { GameContainer } from './src/game-container';
-import { initialState } from './src/state/state';
+import { sunrise } from './src/engine/cards/card';
+import { GameContainer } from './src/engine/game-container';
+import { initialState } from './src/engine/state/state';
 
 const gameContainer = new GameContainer(initialState);
 

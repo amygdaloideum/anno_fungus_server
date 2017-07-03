@@ -6,7 +6,7 @@
     "no-unnecessary-callback-wrapper": true,
     "arrow-return-shorthand": true,
     "only-arrow-functions": [
-      true
+      false
     ],
     "curly": true,
     "class-name": true,
