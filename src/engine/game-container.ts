@@ -1,20 +1,22 @@
 import { stateBasedEffects } from './state-based-effects';
-import { initialState as defaultState  } from './state/state';
+import { getInitialState } from './state/state';
 import { IGameState } from './state/state.d';
 
 export class GameContainer {
   private states: IGameState[];
+  private initialState: IGameState;
   private actions: any[];
   private stateBasedEffects: Function[];
 
-  constructor(initialState: IGameState = defaultState) {
+  constructor(initialState: IGameState) {
     this.states = [];
     this.actions = [];
+    this.initialState = initialState;
     this.states.push(initialState);
   }
 
   public getLatestState(): IGameState {
-    return this.states.slice(-1).pop() || defaultState;
+    return this.states.slice(-1).pop() || this.initialState;
   }
 
   public applyStateBasedEffects(): void {

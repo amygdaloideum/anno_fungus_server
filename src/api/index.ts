@@ -3,7 +3,8 @@ import * as uuid from 'uuid/v1';
 import * as cards from '../engine/cards';
 import { find as findCard } from '../engine/cards/finder';
 import { GameContainer } from '../engine/game-container';
-import { IClient, IGameInstance } from './index.d';
+import { getInitialState } from '../engine/state/state';
+import { IClient, IGameInstance, ITicket } from './index.d';
 
 const PORT = 8098;
 
@@ -27,15 +28,18 @@ io.sockets.on('connection', socket => {
   socket.on('APPLY_EFFECT', applyEffect);
 
   function applyEffect(id: number): void {
+    if (!game.container) { return; }
     const card = findCard(id);
     const nextState = game.container.next(card.reducer);
     emitToGameClients(game, 'NEW_STATE', nextState);
     console.log(`client ${client.id} played card ${card.name}`);
   }
 
-  function joinGame(gameId: string): void {
-    const foundGame = games.find(e => e.id === gameId);
+  function joinGame(ticket: ITicket): void {
+    const foundGame = games.find(e => e.id === ticket.gameId);
+    if (!ticket.deck) { return; }  // No deck
     if (!foundGame) { return; } // Game does not exist
+    client.deck = ticket.deck;
     game = foundGame;
     if (game.clients.length >= game.capacity) { return; } // Game is full
     game.clients.push(client);
@@ -47,6 +51,9 @@ io.sockets.on('connection', socket => {
 
   function startGame(game: IGameInstance): void {
     // TODO: initialize decks etc.
+    const playerAssets = game.clients.map(client => ({deckList: client.deck || []}));
+    const initialGameState = getInitialState(playerAssets);
+    game.container = new GameContainer(initialGameState);
     emitToGameClients(game, 'GAME_STARTED', game.container.getLatestState());
     console.log(`game ${game.id} has been started`);
   }
@@ -56,7 +63,6 @@ io.sockets.on('connection', socket => {
       id,
       capacity: 2,
       clients: [],
-      container: new GameContainer(),
     };
     games.push(game);
     io.emit('GAME_CREATED_CONFIRM', id);
