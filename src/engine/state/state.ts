@@ -1,4 +1,5 @@
-import { IGameState, IPlayerAssets } from './state.d';
+import { IGameState } from "./game-state";
+import { IPlayerAssets } from "./player-assets";
 
 const HANDSIZE = 4;
 const TOWERSIZE = 25;
@@ -29,12 +30,15 @@ export const getInitialState = (playerAssets: IPlayerAssets[]): IGameState => {
   return state;
 };
 
-export function validatePlayerAssets(playerAssets: IPlayerAssets): boolean {
+export const validatePlayerAssets = (playerAssets: IPlayerAssets): boolean => {
   // TODO: Real validation
   return true;
 }
 
-function drawInitialHand(deckRef: string[], handSize: number): {deck: string[]; hand: string[]} {
+const drawInitialHand = (
+  deckRef: string[],
+  handSize: number,
+): {deck: string[]; hand: string[]} => {
   const deck = deckRef.slice(0);
   const hand: string[] = [];
   while (handSize--) {
@@ -47,8 +51,9 @@ function drawInitialHand(deckRef: string[], handSize: number): {deck: string[]; 
   return {deck, hand};
 }
 
-function shuffleArray<T>(array: T[]): T[] {
+const shuffleArray = <T>(array: T[]): T[] => {
   const copy = array.slice(0);
+
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = copy[i];

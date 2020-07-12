@@ -1,6 +1,5 @@
 import { stateBasedEffects } from './state-based-effects';
-import { getInitialState } from './state/state';
-import { IGameState } from './state/state.d';
+import { getInitialState, IGameState } from './state';
 
 export class GameContainer {
   private states: IGameState[];

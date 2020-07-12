@@ -1,11 +1,9 @@
-import { IGameState } from './state/state.d';
+import { IGameState } from './state';
 
-const changeTurn = (state: IGameState): IGameState => {
-  return {
-    turn: state.turn + 1,
-    ...state
-  };
-};
+const changeTurn = (state: IGameState): IGameState => ({
+  ...state,
+  turn: state.turn + 1,
+});
 
 export const stateBasedEffects = [
   changeTurn,
