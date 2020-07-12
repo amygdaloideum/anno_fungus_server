@@ -1,7 +1,6 @@
-import * as cards from './card';
-import { ICard } from './cards.d';
+import { cards } from './cards';
+import { ICard } from './card';
 
-export const find = (id: number): ICard => {
-    // TODO function that actually searches all cards.
-    return cards.sunrise;
-};
+export const findCard = (id: number): ICard | undefined =>
+  cards.find(card => card.id === id)
+;

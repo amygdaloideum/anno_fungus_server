@@ -1,16 +1,23 @@
 import { IGameInstance, IClient, ITicket } from './state';
 import { getInitialState } from '../engine/state';
 import { GameContainer } from '../engine/game-container';
+import { findCard } from '../engine/cards';
 
 export const applyEffect = (
   game: IGameInstance,
   client: IClient,
   id: number,
 ): void => {
-  if (!game.container) { return; }
   const card = findCard(id);
+
+  if (!card) {
+    console.log(`card not found ${id}`);
+    return;
+  }
+
   const nextState = game.container.next(card.reducer);
   emitToGameClients(game, 'NEW_STATE', nextState);
+
   console.log(`client ${client.id} played card ${card.name}`);
 };
 

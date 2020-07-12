@@ -1,12 +1,9 @@
 import * as socketIo from 'socket.io';
 import { v1 as uuid } from 'uuid';
-import * as cards from '../engine/cards';
-import { find as findCard } from '../engine/cards/finder';
-import { GameContainer } from '../engine/game-container';
-import { getInitialState } from '../engine/state';
-import { IGameInstance, IClient, ITicket } from './state';
-import { createClientMessageHandler, ProcessClientMessageMap } from './messages/client';
+import { IGameInstance, IClient } from './state';
+import { ProcessClientMessageMap } from './messages/client';
 import { createGame, joinGame, applyEffect } from './game';
+import { createMessageHandler } from './messages';
 
 const PORT = 8098;
 
@@ -38,7 +35,7 @@ io.sockets.on('connection', socket => {
     },
   };
 
-  const processClientMessage = createClientMessageHandler(
+  const processClientMessage = createMessageHandler(
     processClientMessageMap,
   );
 
